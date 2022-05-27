@@ -30,6 +30,7 @@ void getTime(int ordChild){
 			printf("Child %d ", ordChild);
 		
 		printf("ID: %ld PID: %d PPID: %d Time: %02d:%02d:%02d:%03d\n\n", tid[ordChild], getpid(), getppid(), hh, mm, ss, mls);	
+		fflush(stdout);
 	}
 }
 
@@ -56,9 +57,8 @@ void main(void) {
 	
 	//creating threads
 	for (int i = 1; i <= CHILDS_COUNT; i++) {
-		int err = pthread_create(&(tid[i]), NULL, &start_routine, NULL);
-		if (err != 0) {
-			perror(strerror(err));
+		if (pthread_create(&(tid[i]), NULL, &start_routine, NULL)) {
+			perror("Can not to start a thread");
 			tid[i] = 0;
 		}
 	}
