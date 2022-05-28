@@ -302,6 +302,17 @@ void main(int argc, char* argv[]) {
 		perror("Can not close a semaphore");
     if (sem_unlink(SEM_THREAD_NAME) == -1)
 		perror("Can not unlink a semaphore");
+		
+	if (sem_close(bigger.semFile) == -1)
+		perror("Can not close a semaphore");
+	if (sem_unlink(SEM_FILE_BIGGER) == -1)
+		perror("Can not unlink a semaphore");
+		
+	if (sem_close(smaller.semFile) == -1)
+		perror("Can not close a semaphore");
+	if (sem_unlink(SEM_FILE_SMALLER) == -1)
+		perror("Can not unlink a semaphore");
+	
 	
 	//close files
 	if (fclose(bigger.fp) == EOF)
